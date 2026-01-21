@@ -3,10 +3,16 @@ const app = express();
 
 // 🔹 Routes
 const authRoutes = require('./routes/auth.routes');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
+
+
 
 // 🔹 Middleware
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 
 // 🔹 Mount routes
 app.use('/auth', authRoutes);
